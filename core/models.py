@@ -15,5 +15,12 @@ class Task(models.Model):
     done = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag, related_name='tasks', blank=True)
 
+    class Meta:
+        ordering = ("-created_at",)
+
     def __str__(self):
-        return self.content
+        return (
+            f"{self.content} (completed: {self.done})"
+            f"Created at: {self.content}"
+            f"Deadline: {self.deadline}"
+        )
