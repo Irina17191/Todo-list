@@ -1,0 +1,63 @@
+body {
+    line-height: 1.6;
+    margin: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+
+.link-to-page {
+    text-decoration: none;
+    color: #fff;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+h4 {
+    margin: 0;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.task-done {
+    color: #029d02;
+}
+
+.task-not-done {
+    color: #d90022;
+}
+
+
+.tag-list {
+    color: #a6a6a6;
+}
