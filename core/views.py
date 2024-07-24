@@ -44,7 +44,6 @@ class TagDeleteView(generic.DeleteView):
 
 class TaskCreateView(generic.CreateView):
     model = Task
-    # fields = "__all__"
     form_class = TaskForm
     success_url = reverse_lazy("core:index")
     template_name = "core/task_form.html"
