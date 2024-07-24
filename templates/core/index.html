@@ -1,18 +1,66 @@
 {% extends 'base.html' %}
-
-{% block title %}{% endblock %}
-
 {% block content %}
-  <h1>{{ title }}</h1>
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1> TODO list</h1>
+    <a href="{% url 'core:task-create' %}" class="btn btn-primary link-to-page">
+      Add task
+    </a>
+  </div>
 
   {% if tasks %}
-    <ul>
+    <ul style="list-style-type: none; padding: 0;">
       {% for task in tasks %}
-        <li>{{ task.content }}</li>
-        <!-- Тут можна відображати інші поля завдань, наприклад, дедлайн, статус і т.д. -->
+        <li style="border-bottom: 1px solid #ccc; padding: 10px 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="flex-grow: 1;">
+
+              <h4>
+                {{ task.content }}
+                <strong>
+                  {% if task.done %}
+                    <span class="task-done">Done</span>
+                  {% else %}
+                    <span class="task-not-done">Not done</span>
+                  {% endif %}
+                </strong>
+
+              </h4>
+
+              <p style="margin-bottom: 5px;">
+                Created: {{ task.created_at }}
+                {% if not task.is_completed and task.deadline %}
+                  <strong style="color: red; margin-left: 10px;">Deadline: {{ task.deadline }}</strong>
+                {% endif %}
+              </p>
+              <p style="margin-bottom: 5px;">
+                {% if task.tags.all %}
+                  <span style="margin-right: 10px;">Tags:</span>
+                  {% for tag in task.tags.all %}
+                    <span style="margin-right: 5px;">{{ tag.name }}</span>
+                  {% endfor %}
+                {% endif %}
+                <strong>
+                  <a href="{% url 'core:task-update' pk=task.id %}" style="text-decoration: none; margin-left: 10px;">Update</a>
+                  <a href="{% url 'core:task-delete' pk=task.id %}" style="text-decoration: none; margin-left: 10px;">Delete</a>
+                </strong>
+              </p>
+            </div>
+            <div style="margin-left: 10px;">
+              {% if task.done %}
+                <form action="{% url 'core:task-toggle' pk=task.id %}" method="get">
+                  <button type="submit" class="btn btn-secondary">Undo</button>
+                </form>
+              {% else %}
+                <form action="{% url 'core:task-toggle' pk=task.id %}" method="get">
+                  <button type="submit" class="btn btn-success">Complete</button>
+                </form>
+              {% endif %}
+            </div>
+          </div>
+        </li>
       {% endfor %}
     </ul>
   {% else %}
-    <p>No tasks found.</p>
+    <p>There are no tasks</p>
   {% endif %}
 {% endblock %}
